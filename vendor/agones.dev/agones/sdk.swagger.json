@@ -1,0 +1,323 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "sdk.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/gameserver": {
+      "get": {
+        "summary": "Retrieve the current GameServer data",
+        "operationId": "GetGameServer",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/sdkGameServer"
+            }
+          }
+        },
+        "tags": [
+          "SDK"
+        ]
+      }
+    },
+    "/health": {
+      "post": {
+        "summary": "Send a Empty every d Duration to declare that this GameSever is healthy",
+        "operationId": "Health",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/sdkEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "(streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sdkEmpty"
+            }
+          }
+        ],
+        "tags": [
+          "SDK"
+        ]
+      }
+    },
+    "/metadata/annotation": {
+      "put": {
+        "summary": "Apply a Annotation to the backing GameServer metadata",
+        "operationId": "SetAnnotation",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/sdkEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sdkKeyValue"
+            }
+          }
+        ],
+        "tags": [
+          "SDK"
+        ]
+      }
+    },
+    "/metadata/label": {
+      "put": {
+        "summary": "Apply a Label to the backing GameServer metadata",
+        "operationId": "SetLabel",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/sdkEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sdkKeyValue"
+            }
+          }
+        ],
+        "tags": [
+          "SDK"
+        ]
+      }
+    },
+    "/ready": {
+      "post": {
+        "summary": "Call when the GameServer is ready",
+        "operationId": "Ready",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/sdkEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sdkEmpty"
+            }
+          }
+        ],
+        "tags": [
+          "SDK"
+        ]
+      }
+    },
+    "/shutdown": {
+      "post": {
+        "summary": "Call when the GameServer is shutting down",
+        "operationId": "Shutdown",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/sdkEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sdkEmpty"
+            }
+          }
+        ],
+        "tags": [
+          "SDK"
+        ]
+      }
+    },
+    "/watch/gameserver": {
+      "get": {
+        "summary": "Send GameServer details whenever the GameServer is updated",
+        "operationId": "WatchGameServer",
+        "responses": {
+          "200": {
+            "description": "(streaming responses)",
+            "schema": {
+              "$ref": "#/definitions/sdkGameServer"
+            }
+          }
+        },
+        "tags": [
+          "SDK"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "GameServerObjectMeta": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "resource_version": {
+          "type": "string"
+        },
+        "generation": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creation_timestamp": {
+          "type": "string",
+          "format": "int64",
+          "title": "timestamp is in Epoch format, unit: seconds"
+        },
+        "deletion_timestamp": {
+          "type": "string",
+          "format": "int64",
+          "title": "optional deletion timestamp in Epoch format, unit: seconds"
+        },
+        "annotations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "representation of the K8s ObjectMeta resource"
+    },
+    "GameServerSpec": {
+      "type": "object",
+      "properties": {
+        "health": {
+          "$ref": "#/definitions/SpecHealth"
+        }
+      }
+    },
+    "GameServerStatus": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatusPort"
+          }
+        }
+      }
+    },
+    "SpecHealth": {
+      "type": "object",
+      "properties": {
+        "Disabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "PeriodSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "FailureThreshold": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "InitialDelaySeconds": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "StatusPort": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "sdkEmpty": {
+      "type": "object",
+      "title": "I am Empty"
+    },
+    "sdkGameServer": {
+      "type": "object",
+      "properties": {
+        "object_meta": {
+          "$ref": "#/definitions/GameServerObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/GameServerSpec"
+        },
+        "status": {
+          "$ref": "#/definitions/GameServerStatus"
+        }
+      },
+      "description": "A GameServer Custom Resource Definition object\nWe will only export those resources that make the most\nsense. Can always expand to more as needed."
+    },
+    "sdkKeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": "Key, Value entry"
+    }
+  }
+}

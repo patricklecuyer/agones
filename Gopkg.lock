@@ -2,6 +2,42 @@
 
 
 [[projects]]
+  digest = "1:c6538a86d7bcca56cd41d89c6cf7d59884756c111edaf32c6acc1a43514f38b2"
+  name = "agones.dev/agones"
+  packages = [
+    "pkg",
+    "pkg/apis/stable",
+    "pkg/apis/stable/v1alpha1",
+    "pkg/client/clientset/versioned",
+    "pkg/client/clientset/versioned/fake",
+    "pkg/client/clientset/versioned/scheme",
+    "pkg/client/clientset/versioned/typed/stable/v1alpha1",
+    "pkg/client/clientset/versioned/typed/stable/v1alpha1/fake",
+    "pkg/client/informers/externalversions",
+    "pkg/client/informers/externalversions/internalinterfaces",
+    "pkg/client/informers/externalversions/stable",
+    "pkg/client/informers/externalversions/stable/v1alpha1",
+    "pkg/client/listers/stable/v1alpha1",
+    "pkg/fleetallocation",
+    "pkg/fleetautoscalers",
+    "pkg/fleets",
+    "pkg/gameservers",
+    "pkg/gameserversets",
+    "pkg/sdk",
+    "pkg/testing",
+    "pkg/util/crd",
+    "pkg/util/runtime",
+    "pkg/util/signals",
+    "pkg/util/webhooks",
+    "pkg/util/workerqueue",
+    "sdks/go",
+    "test/e2e/framework",
+  ]
+  pruneopts = ""
+  revision = "cafcf04ab30b93004afe3f5f67c6f771b2f82f48"
+  version = "v0.5.0"
+
+[[projects]]
   digest = "1:2b10b9a545074605403d32baf9dda24b7582976ba7e9b46c4c7b9da9edac03e7"
   name = "cloud.google.com/go"
   packages = ["compute/metadata"]
@@ -106,7 +142,7 @@
   version = "v0.1.0"
 
 [[projects]]
-  digest = "1:b563eec078077ba5cedc795462cbd6d7c75a106a4d2e3d02940093c80e28de28"
+  digest = "1:dc70bd0ecd18729cf0ecf8828045e185ce0b15084f1bbe250422ab65e6fcd79c"
   name = "github.com/grpc-ecosystem/grpc-gateway"
   packages = [
     "runtime",
@@ -114,8 +150,8 @@
     "utilities",
   ]
   pruneopts = ""
-  revision = "92583770e3f01b09a0d3e9bdf64321d8bebd48f2"
-  version = "v1.4.1"
+  revision = "aeab1d96e0f1368d243e2e5f526aa29d495517bb"
+  version = "v1.5.1"
 
 [[projects]]
   branch = "master"
@@ -553,6 +589,7 @@
   digest = "1:ddf1cbe17938e59f1f5d7caa57c03382a450fdc5c91e5852ff89802c8b27b459"
   name = "k8s.io/apimachinery"
   packages = [
+    "pkg/api/equality",
     "pkg/api/errors",
     "pkg/api/meta",
     "pkg/api/resource",
@@ -773,6 +810,33 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "agones.dev/agones/pkg",
+    "agones.dev/agones/pkg/apis/stable",
+    "agones.dev/agones/pkg/apis/stable/v1alpha1",
+    "agones.dev/agones/pkg/client/clientset/versioned",
+    "agones.dev/agones/pkg/client/clientset/versioned/fake",
+    "agones.dev/agones/pkg/client/clientset/versioned/scheme",
+    "agones.dev/agones/pkg/client/clientset/versioned/typed/stable/v1alpha1",
+    "agones.dev/agones/pkg/client/clientset/versioned/typed/stable/v1alpha1/fake",
+    "agones.dev/agones/pkg/client/informers/externalversions",
+    "agones.dev/agones/pkg/client/informers/externalversions/internalinterfaces",
+    "agones.dev/agones/pkg/client/informers/externalversions/stable",
+    "agones.dev/agones/pkg/client/informers/externalversions/stable/v1alpha1",
+    "agones.dev/agones/pkg/client/listers/stable/v1alpha1",
+    "agones.dev/agones/pkg/fleetallocation",
+    "agones.dev/agones/pkg/fleetautoscalers",
+    "agones.dev/agones/pkg/fleets",
+    "agones.dev/agones/pkg/gameservers",
+    "agones.dev/agones/pkg/gameserversets",
+    "agones.dev/agones/pkg/sdk",
+    "agones.dev/agones/pkg/testing",
+    "agones.dev/agones/pkg/util/crd",
+    "agones.dev/agones/pkg/util/runtime",
+    "agones.dev/agones/pkg/util/signals",
+    "agones.dev/agones/pkg/util/webhooks",
+    "agones.dev/agones/pkg/util/workerqueue",
+    "agones.dev/agones/sdks/go",
+    "agones.dev/agones/test/e2e/framework",
     "github.com/golang/glog",
     "github.com/golang/protobuf/proto",
     "github.com/grpc-ecosystem/grpc-gateway/runtime",
@@ -798,6 +862,7 @@
     "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset",
     "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset/fake",
     "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset/typed/apiextensions/v1beta1",
+    "k8s.io/apimachinery/pkg/api/equality",
     "k8s.io/apimachinery/pkg/api/errors",
     "k8s.io/apimachinery/pkg/apis/meta/v1",
     "k8s.io/apimachinery/pkg/fields",
@@ -811,6 +876,7 @@
     "k8s.io/apimachinery/pkg/util/runtime",
     "k8s.io/apimachinery/pkg/util/validation/field",
     "k8s.io/apimachinery/pkg/util/wait",
+    "k8s.io/apimachinery/pkg/util/yaml",
     "k8s.io/apimachinery/pkg/watch",
     "k8s.io/client-go/discovery",
     "k8s.io/client-go/discovery/fake",
